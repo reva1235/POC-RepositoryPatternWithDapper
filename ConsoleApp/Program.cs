@@ -11,14 +11,14 @@ namespace ConsoleApp
     {
         private static IContainer CompositionRoot()
         {
-            
-
             var builder = new ContainerBuilder();
             builder.Register<Func<IDbConnection>>(c => () => new SqliteConnection("Data Source=Application.db;Cache=Shared"));
-            builder.RegisterType<Database.SQLite.UserRepository>().As<IUserRepository>();
+            builder.RegisterType<Database.SQLite.UserRepository>().As<IUserRepository>()
+                .OnActivated(s => s.Instance.Initialize());
             builder.RegisterType<Application>();
             builder.RegisterType<EmployeeService>().As<IEmployeeService>();
             builder.RegisterType<PrintService<User>>().As<IPrintService<User>>();
+                
             return builder.Build();
         }
 

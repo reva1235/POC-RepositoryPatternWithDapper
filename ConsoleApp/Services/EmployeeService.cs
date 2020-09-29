@@ -19,5 +19,10 @@ namespace ConsoleApp
         {
             return UserRepository.FindAll();
         }
+
+        public void Hire(User user)
+        {
+            UserRepository.Insert(user);
+        }
     }
 }

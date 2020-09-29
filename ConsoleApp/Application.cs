@@ -16,8 +16,15 @@ namespace ConsoleApp
 
         public void Run()
         {
-            var employee = EmployeeService.GetAll();
-            PrintService.Print(employee);
+            EmployeeService.Hire(new User
+            {
+                USER_NAME = "Batman",
+                PASSWORD = "Bruce",
+                USER_GROUP = "Heros",
+                BLOB = new byte[] {0xff, 0x01}
+            });
+            
+            PrintService.Print(EmployeeService.GetAll());
         }
     }
 }

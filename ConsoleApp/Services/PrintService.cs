@@ -7,11 +7,9 @@ namespace ConsoleApp
     {
         public void Print(IEnumerable<T> ts)
         {
-            var employees = ts ?? new T[] { };
-
-            foreach (var item in ts)
+            foreach (var item in ts ?? new T[] { })
             {
-                Console.WriteLine();
+                Console.WriteLine(item);
             }
         }
     }
