@@ -1,15 +1,17 @@
-﻿namespace ConsoleApp
+﻿using Domain;
+
+namespace ConsoleApp
 {
     public class Application
     {
         
-        public Application(IPrintService<Employee> printService, IEmployeeService employeeService) 
+        public Application(IPrintService<User> printService, IEmployeeService employeeService) 
         {
             PrintService = printService;
             EmployeeService = employeeService;
         }
 
-        public IPrintService<Employee> PrintService { get; }
+        public IPrintService<User> PrintService { get; }
         public IEmployeeService EmployeeService { get; }
 
         public void Run()

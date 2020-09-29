@@ -1,21 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using Database.Core;
+using Domain;
+using System.Collections.Generic;
 
 namespace ConsoleApp
 {
     internal class EmployeeService : IEmployeeService
     {
-        public EmployeeService(IPrintService<Employee> printService, IEmployeeRepository employeeRepository)
+        public EmployeeService(IPrintService<User> printService, IUserRepository userRepository)
         {
             PrintService = printService;
-            EmployeeRepository = employeeRepository;
+            UserRepository = userRepository;
         }
 
-        public IPrintService<Employee> PrintService { get; }
-        public IEmployeeRepository EmployeeRepository { get; }
+        public IPrintService<User> PrintService { get; }
+        public IUserRepository UserRepository { get; }
 
-        public IEnumerable<Employee> GetAll()
+        public IEnumerable<User> GetAll()
         {
-            return EmployeeRepository.GetAll();
+            return UserRepository.FindAll();
         }
     }
 }

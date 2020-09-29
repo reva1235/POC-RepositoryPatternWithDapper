@@ -1,5 +1,9 @@
 ﻿using Autofac;
+using Database.Core;
+using Domain;
+using Microsoft.Data.Sqlite;
 using System;
+using System.Data;
 
 namespace ConsoleApp
 {
@@ -7,11 +11,14 @@ namespace ConsoleApp
     {
         private static IContainer CompositionRoot()
         {
+            
+
             var builder = new ContainerBuilder();
-            builder.RegisterType<EmployeeRepository>().As<IEmployeeRepository>();
+            builder.Register<Func<IDbConnection>>(c => () => new SqliteConnection("Data Source=Application.db;Cache=Shared"));
+            builder.RegisterType<Database.SQLite.UserRepository>().As<IUserRepository>();
             builder.RegisterType<Application>();
             builder.RegisterType<EmployeeService>().As<IEmployeeService>();
-            builder.RegisterType<PrintService<Employee>>().As<IPrintService<Employee>>();
+            builder.RegisterType<PrintService<User>>().As<IPrintService<User>>();
             return builder.Build();
         }
 

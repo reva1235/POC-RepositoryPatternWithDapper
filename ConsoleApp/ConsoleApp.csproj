@@ -12,6 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Database.Core\Database.Core.csproj" />
+    <ProjectReference Include="..\Database.SQLite\Database.SQLite.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Application.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace ConsoleApp
 {
-    internal class PrintService<Employee> : IPrintService<Employee>
+    internal class PrintService<T> : IPrintService<T>
     {
-        public void Print(IEnumerable<Employee> ts)
+        public void Print(IEnumerable<T> ts)
         {
-            var employees = ts ?? new Employee[] { };
+            var employees = ts ?? new T[] { };
 
             foreach (var item in ts)
             {
