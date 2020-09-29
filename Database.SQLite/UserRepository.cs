@@ -1,24 +1,54 @@
-﻿using Database.Core;
-using System;
-using System.Data;
-using Microsoft.Data.Sqlite;
-using System.Collections.Generic;
+﻿using Dapper;
+using Database.Core;
 using Domain;
-using Dapper;
+using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace Database.SQLite
 {
     public class UserRepository : IUserRepository
     {
-        public UserRepository(Func<IDbConnection> connect)
+        public UserRepository(string SqlConnection)
         {
-            Connect = connect;
+            Connect = () => new SqliteConnection(SqlConnection);
         }
 
         public Func<IDbConnection> Connect { get; }
+        public ILogger Logger { get; set; }
+
+        public void Delete(long key)
+        {
+            using (var c = Connect())
+            {
+                c.Open();
+                c.Execute($@"DELETE FROM USERS WHERE USER_ID = {key}");
+            }
+        }
+
+        public void Delete(User userInformation)
+        {
+            using (var c = Connect())
+            {
+                c.Open();
+                c.Execute($@"DELETE FROM USERS WHERE USER_ID = {userInformation.USER_ID}");
+            }
+        }
+
+        public IEnumerable<User> FindAll()
+        {
+            using (var c = Connect())
+            {
+                c.Open();
+                return c.Query<User>("SELECT * FROM USERS");
+            }
+        }
 
         public void Initialize()
         {
+            Logger.LogTraceStart();
             using (var c = Connect() as SqliteConnection)
             {
                 c.Open();
@@ -37,33 +67,7 @@ namespace Database.SQLite
 
                 createTable.ExecuteReader();
             }
-        }
-
-        public IEnumerable<User> FindAll()
-        {
-            using (var c = Connect())
-            {
-                c.Open();
-                return c.Query<User>("SELECT * FROM USERS");
-            }
-        }
-
-        public void Delete(long key)
-        {
-            using (var c = Connect())
-            {
-                c.Open();
-                c.Execute($@"DELETE FROM USERS WHERE USER_ID = {key}");
-            }
-        }
-
-        public void Delete(User userInformation)
-        {
-            using (var c = Connect())
-            {
-                c.Open();
-                c.Execute($@"DELETE FROM USERS WHERE USER_ID = {userInformation.USER_ID}");
-            }
+            Logger.LogTraceEnd();
         }
 
         public void Insert(User user)
