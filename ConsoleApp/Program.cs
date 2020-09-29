@@ -28,6 +28,11 @@ namespace ConsoleApp
                 .WithParameter("SqlConnection", "Data Source=Application.db;Cache=Shared")
                 .OnActivated(s => s.Instance.Initialize());
 
+            builder.RegisterType<Database.PostgreSQL.UserRepository>().As<IUserRepository>()
+                .PropertiesAutowired()
+                .WithParameter("SqlConnection", "Host=localhost;Database=mlsdb;Username=mlsuser;Password=mlsuser;")
+                .OnActivated(s => s.Instance.Initialize());
+
             return builder.Build();
         }
     }

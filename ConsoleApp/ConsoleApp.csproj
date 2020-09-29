@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Database.Core\Database.Core.csproj" />
+    <ProjectReference Include="..\Database.PostgreSQL\Database.PostgreSQL.csproj" />
     <ProjectReference Include="..\Database.SQLite\Database.SQLite.csproj" />
   </ItemGroup>
 
