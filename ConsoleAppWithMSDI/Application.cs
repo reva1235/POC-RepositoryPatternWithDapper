@@ -1,7 +1,7 @@
 ﻿using Domain;
 using Services.Core;
 
-namespace ConsoleApp
+namespace ConsoleAppWithMSDI
 {
     public class Application
     {

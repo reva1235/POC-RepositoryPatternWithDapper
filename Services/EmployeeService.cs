@@ -1,10 +1,11 @@
 ﻿using Database.Core;
 using Domain;
+using Services.Core;
 using System.Collections.Generic;
 
-namespace ConsoleApp
+namespace Services
 {
-    internal class EmployeeService : IEmployeeService
+    public class EmployeeService : IEmployeeService
     {
         public EmployeeService(IPrintService<User> printService, IUserRepository userRepository)
         {

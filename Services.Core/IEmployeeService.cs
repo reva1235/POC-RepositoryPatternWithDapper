@@ -1,7 +1,7 @@
 ﻿using Domain;
 using System.Collections.Generic;
 
-namespace ConsoleApp
+namespace Services.Core
 {
     public interface IEmployeeService
     {

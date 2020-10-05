@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace ConsoleApp
+namespace Services.Core
 {
     public interface IPrintService<T>
     {

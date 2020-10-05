@@ -2,6 +2,8 @@
 using Database.Core;
 using Domain;
 using Microsoft.Extensions.Logging;
+using Services;
+using Services.Core;
 
 namespace ConsoleApp
 {
@@ -21,7 +23,6 @@ namespace ConsoleApp
             builder.RegisterType<Application>();
             builder.RegisterType<EmployeeService>().As<IEmployeeService>();
             builder.RegisterType<PrintService<User>>().As<IPrintService<User>>();
-            
             
             builder.RegisterType<Database.SQLite.UserRepository>().As<IUserRepository>()
                 .PropertiesAutowired()

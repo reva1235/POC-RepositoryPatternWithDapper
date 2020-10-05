@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Services.Core;
+using System;
 using System.Collections.Generic;
 
-namespace ConsoleApp
+namespace Services
 {
-    internal class PrintService<T> : IPrintService<T>
+    public class PrintService<T> : IPrintService<T>
     {
         public void Print(IEnumerable<T> ts)
         {
